@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
     private $model;
-    private $pathViewController = 'admin.slider.';
+    private $controllerName = 'slider';
+    private $pathViewController = 'admin.pages.slider.';
     public function __construct()
     {
       $this->model = new MainModel();
-      view()->share('test','share data');
+      view()->share('controllerName',$this->controllerName);
     }
     public function index()
     {
