@@ -12,14 +12,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Bộ lọc</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
+            @include('admin.templates.x_title',['title' => 'Bộ lọc']);
             <div class="x_content">
                 <div class="row">
                     <div class="col-md-6"><a
@@ -83,14 +76,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Danh sách</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
+            @include('admin.templates.x_title',['title' => 'Danh Sách']);
             <div class="x_content">
                 @include('admin.pages.slider.list')
             </div>
@@ -102,17 +88,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Phân trang
-                </h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-
+            @include('admin.templates.x_title',['title' => 'Phân Trang']);
             <div class="x_content">
                 <div class="row">
                     <div class="col-md-6">
