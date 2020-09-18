@@ -23,10 +23,11 @@
             $name            = $value['name'];
             $description     = $value['description'];
             $link            = $value['link'];
-            $thumb           = $value['thumb'];
+            $thumb           = Template::showItemThumb($controllerName,$value['thumb'],$value['name']);
             $createdHistory  = Template::showItemHistory($value['created_by'],$value['created']);
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
             $status          = Template::showItemStatus($controllerName,$id,$value['status']);
+            $listBtnAction   = Template::showButtonAction($controllerName,$id);
           @endphp 
           <tr class="{{ $class }} pointer">
             <td>{{ $index }}</td>
@@ -34,21 +35,14 @@
               <p><strong>Name:</strong> {{ $name }}</p>
               <p><strong>Description:</strong> {{ $description }}</p>
               <p><strong>Link:</strong> {{ $link }}</p>
-              <p><img src="{{ $thumb }}" alt="{{ $name }}" class="zvn-thumb"></p>
+              <p>{!! $thumb !!} </p>
             </td>
             <td>
               {!! $status !!}
             </td>
             <td>{!! $createdHistory !!}</td>           
             <td>{!! $modifiedHistory !!}</td>
-            <td class="last">
-              <div class="zvn-box-btn-filter">
-                <a href="http://proj_news.xyz/admin123/slider/form/3" type="button" class="btn btn-icon btn-success" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i>
-                </a>
-                <a href="http://proj_news.xyz/admin123/slider/delete/3" type="button" class="btn btn-icon btn-danger btn-delete" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="fa fa-trash"></i>
-                </a>
-              </div>
-            </td>
+            <td class="last">{!! $listBtnAction !!}</td>
           </tr>
         @endforeach
         @else
