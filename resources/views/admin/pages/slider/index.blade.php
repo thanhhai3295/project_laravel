@@ -1,4 +1,8 @@
 @extends('admin.main')
+@php
+    use App\Helpers\Template as Template; 
+    $xhtmlButtonFilter = Template::showButtonFilter($controllerName,$countByStatus,$params['filter']['status']);
+@endphp
 @section('content')
 
 <div class="page-header zvn-page-header clearfix">
@@ -16,19 +20,11 @@
             @include('admin.templates.x_title',['title' => 'Bộ lọc'])
             <div class="x_content">
                 <div class="row">
-                    <div class="col-md-6"><a
-                            href="?filter_status=all" type="button"
-                            class="btn btn-primary">
-                        All <span class="badge bg-white">4</span>
-                    </a><a href="?filter_status=active"
-                            type="button" class="btn btn-success">
-                        Active <span class="badge bg-white">2</span>
-                    </a><a href="?filter_status=inactive"
-                            type="button" class="btn btn-success">
-                        Inactive <span class="badge bg-white">2</span>
-                    </a>
-                    </div>
                     <div class="col-md-6">
+                        {!!$xhtmlButtonFilter!!}
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
                         <div class="input-group">
                             <div class="input-group-btn">
                                 <button type="button"
@@ -54,19 +50,11 @@
                             <input type="text" class="form-control" name="search_value" value="">
                             <span class="input-group-btn">
                         <button id="btn-clear" type="button" class="btn btn-success"
-                                style="margin-right: 0px">Xóa tìm kiếm</button>
+                                style="margin-right: 5px">Xóa tìm kiếm</button>
                         <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
                         </span>
                             <input type="hidden" name="search_field" value="all">
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <select name="select_filter" class="form-control"
-                                data-field="level">
-                            <option value="default" selected="selected">Select Level</option>
-                            <option value="admin">Admin</option>
-                            <option value="member">Member</option>
-                        </select>
                     </div>
                 </div>
             </div>

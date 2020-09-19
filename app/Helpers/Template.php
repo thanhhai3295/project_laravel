@@ -3,17 +3,37 @@
   use Config;
   use Route;
   class Template {
+    public static function showButtonFilter($controllerName,$countByStatus,$currentFilterStatus){
+      $xhtml = null;
+      $tmplStatus = Config::get('zvn.template.status');
+      if(count($countByStatus) > 0) {
+        array_unshift($countByStatus,[
+          'status' => 'all',
+          'count'  => array_sum(array_column($countByStatus,'count'))
+        ]);
+        foreach ($countByStatus as $key => $value) {
+          $statusValue = $value['status'];
+          $statusValue = array_key_exists($statusValue,$tmplStatus) ? $statusValue : 'default';
+          $currentStatus = $tmplStatus[$statusValue];
+          $link = Route($controllerName)."?filter_status=$statusValue";
+          $class = ($currentFilterStatus == $statusValue) ? 'btn-danger' : 'btn-info';
+          $xhtml .= '<a href="'.$link.'" type="button" class="btn '.$class.'"> 
+                      '.$currentStatus['name'].' <span class="badge bg-white">'.$value['count'].'</span>
+                    </a>';
+        }
+      }
+      return $xhtml;      
+    }
     public static function showItemHistory($by, $time){
       $xhtml = '<p><i class="fa fa-user"></i> '.$by.'</p>
               <p><i class="fa fa-clock-o"></i>  '.date(Config::get('zvn.format.short_time'),strtotime($time)).'</p>';
       return $xhtml;      
     }
     public static function showItemStatus($controllerName,$id,$status) {
-      $tmplStatus = [
-        'active' => ['class' => 'btn-success', 'name' =>'Active'],
-        'inactive' => ['class' => 'btn-danger', 'name' =>'Inactive']
-      ];
-      $currentStatus = $tmplStatus[$status];
+      $tmplStatus = Config::get('zvn.template.status');
+      $statusValue = $status;
+      $statusValue = array_key_exists($statusValue,$tmplStatus) ? $statusValue : 'default';
+      $currentStatus = $tmplStatus[$statusValue];
       $link = Route($controllerName.'/status',['status' => $status, 'id' => $id]);
       $xhtml = '<a href="'.$link.'" type="button" class="btn btn-round '.$currentStatus['class'].'">'.$currentStatus['name'].'</a>';
       return $xhtml;
