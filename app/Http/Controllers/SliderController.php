@@ -8,16 +8,18 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
     private $model;
-    private $controllerName = 'slider';
+    private $controllerName     = 'slider';
     private $pathViewController = 'admin.pages.slider.';
+    private $params             = [];
     public function __construct()
     {
+      $this->params['pagination']['totalItemsPerPage'] = 1;
       $this->model = new MainModel();
       view()->share('controllerName',$this->controllerName);
     }
     public function index()
     {
-      $items = $this->model->listItems(null,['task' => 'admin-list-items']);
+      $items = $this->model->listItems($this->params,['task' => 'admin-list-items']);
       return view($this->pathViewController.'index',[
         'items' => $items
       ]);
