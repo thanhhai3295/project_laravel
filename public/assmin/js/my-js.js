@@ -16,7 +16,7 @@ $(document).ready(function() {
 		let field 		= $(this).data('field');
 		let fieldName 	= $(this).html();
 		$("button.btn-active-field").html(fieldName + ' <span class="caret"></span>');
-    	$inputSearchField.val(field);
+    $inputSearchField.val(field);
 	});
 
 	$btnSearch.click(function() {

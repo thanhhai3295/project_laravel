@@ -11,6 +11,7 @@ class SliderModel extends Model
     public $timestamps = false;
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
+    protected $fieldSearchAccepted = ['id','name','description','link'];
 
     public function listItems($params = null,$options = null) {
         $result = null;
@@ -19,6 +20,17 @@ class SliderModel extends Model
         }
         if($params['filter']['status'] != 'all') {
             $query->where('status','=',$params['filter']['status']);
+        }
+        if($params['search']['value'] != '') {
+            if($params['search']['field'] == 'all') {
+                $query->where(function($query) use ($params) {
+                    foreach ($this->fieldSearchAccepted as $key => $value) {
+                        $query->orWhere($value,'LIKE',"%{$params['search']['value']}%");
+                    }
+                });
+            } else if(in_array($params['search']['field'],$this->fieldSearchAccepted)){
+                $query->where($params['search']['field'],'LIKE',"%{$params['search']['value']}%");
+            }
         }
         $result = $query->orderBy('id','desc')->paginate($params['pagination']['totalItemsPerPage']);  
         return $result;

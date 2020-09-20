@@ -24,6 +24,40 @@
       }
       return $xhtml;      
     }
+    public static function showAreaSearch($controllerName,$paramsSearch){
+      $xhtml = null;
+      $tmplField = Config::get('zvn.template.search');
+      $fieldInController = Config::get('zvn.config.search');
+      $controllerName = array_key_exists($controllerName,$fieldInController) ? $controllerName : 'default';
+      $xhtmlField = null;
+      foreach ($fieldInController[$controllerName] as $value) {
+        $xhtmlField .= '<li>
+                        <a href="#" class="select-field" data-field="'.$value.'">'.$tmplField[$value]['name'].'</a>
+                      </li>';
+      }
+      $searchField = in_array($paramsSearch['field'],$fieldInController[$controllerName]) ? $paramsSearch['field'] : 'all';
+
+      $xhtml = '<div class="input-group">
+                  <div class="input-group-btn">
+                      <button type="button"
+                              class="btn btn-default dropdown-toggle btn-active-field"
+                              data-toggle="dropdown" aria-expanded="false">
+                          '.$tmplField[$searchField]['name'].' <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                          '.$xhtmlField.'
+                      </ul>
+                  </div>
+                  <input type="text" class="form-control" name="search_value" value="'.$paramsSearch['value'].'">
+                  <span class="input-group-btn">
+              <button id="btn-clear" type="button" class="btn btn-success"
+                      style="margin-right: 5px">Xóa tìm kiếm</button>
+              <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
+              </span>
+                  <input type="hidden" name="search_field" value="'.$searchField.'">
+              </div>';
+      return $xhtml;      
+    }
     public static function showItemHistory($by, $time){
       $xhtml = '<p><i class="fa fa-user"></i> '.$by.'</p>
               <p><i class="fa fa-clock-o"></i>  '.date(Config::get('zvn.format.short_time'),strtotime($time)).'</p>';
@@ -43,29 +77,15 @@
       return $xhtml;
     }
     public static function showButtonAction($controllerName,$id) {
-      $tmplButton = [
-        'edit'  => [
-          'class' => 'btn-success','title' => 'Edit','icon' => 'fa-pencil','route-name' => $controllerName.'/form'
-        ],
-        'delete'=> [
-          'class' => 'btn-danger','title' => 'Delete','icon' => 'fa-trash','route-name' => $controllerName.'/delete'
-        ],
-        'info'  => [
-          'class' => 'btn-danger','title' => 'Delete','icon' => 'fa-trash','route-name' => $controllerName.'/delete'
-        ]
-      ];
-
-      $buttonInArea = [
-        'default' => ['edit','delete'],
-        'slider'  => ['edit','delete']
-      ];
+      $tmplButton = Config::get('zvn.template.button');
+      $buttonInArea = Config::get('zvn.config.button');
 
       $controllerName = array_key_exists($controllerName,$buttonInArea) ? $controllerName : 'default';
       $listButtons    = $buttonInArea[$controllerName];
       $xhtml = '<div class="zvn-box-btn-filter">';
       foreach ($listButtons as $key => $value) {
         $currentButton = $tmplButton[$value];
-        $link = Route($currentButton['route-name'],['id' => $id]);
+        $link = Route($controllerName.$currentButton['route-name'],['id' => $id]);
         $xhtml .= '<a href="'.$link.'" type="button" class="btn btn-icon '.$currentButton['class'].'" data-toggle="tooltip" data-placement="top" data-original-title="'.$currentButton['title'].'"><i class="fa '.$currentButton['icon'].'"></i>
                   </a>';
       }
