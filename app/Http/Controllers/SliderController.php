@@ -21,7 +21,7 @@ class SliderController extends Controller
     { 
       $this->params['filter']['status'] = $request->input('filter_status','all');
       $this->params['search']['field'] = $request->input('search_field','');
-      $this->params['search']['value'] = $request->input('search_value','all');
+      $this->params['search']['value'] = $request->input('search_value','');
       $items = $this->model->listItems($this->params,['task' => 'admin-list-items']);
       $countByStatus = $this->model->countItems($this->params,['task' => 'count-items']);
       return view($this->pathViewController.'index',[

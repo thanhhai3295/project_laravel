@@ -1,7 +1,7 @@
 @extends('admin.main')
 @php
     use App\Helpers\Template as Template; 
-    $xhtmlButtonFilter = Template::showButtonFilter($controllerName,$countByStatus,$params['filter']['status']);
+    $xhtmlButtonFilter = Template::showButtonFilter($controllerName,$countByStatus,$params['filter']['status'],$params['search']);
     $xhtmlAreaSearch   = Template::showAreaSearch($controllerName,$params['search']);
 @endphp
 @section('content')

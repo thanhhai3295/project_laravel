@@ -1,5 +1,6 @@
 @php
     use App\Helpers\Template as Template; 
+    use App\Helpers\Highlight as Highlight; 
 @endphp
 <div class="table-responsive">
   <table class="table table-striped jambo_table bulk_action">
@@ -20,9 +21,9 @@
             $id              = $value['id'];
             $index           = $key + 1;
             $class           = ($index % 2 == 0 ) ? 'event' : 'odd';
-            $name            = $value['name'];
-            $description     = $value['description'];
-            $link            = $value['link'];
+            $name            = Highlight::show($value['name'],$params['search'],'name');
+            $description     = Highlight::show($value['description'],$params['search'],'description');
+            $link            = Highlight::show($value['link'],$params['search'],'link');
             $thumb           = Template::showItemThumb($controllerName,$value['thumb'],$value['name']);
             $createdHistory  = Template::showItemHistory($value['created_by'],$value['created']);
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
@@ -32,9 +33,9 @@
           <tr class="{{ $class }} pointer">
             <td>{{ $index }}</td>
             <td width="40%">
-              <p><strong>Name:</strong> {{ $name }}</p>
-              <p><strong>Description:</strong> {{ $description }}</p>
-              <p><strong>Link:</strong> {{ $link }}</p>
+              <p><strong>Name:</strong> {!! $name !!}</p>
+              <p><strong>Description:</strong> {!! $description !!}</p>
+              <p><strong>Link:</strong> {!! $link !!}</p>
               <p>{!! $thumb !!} </p>
             </td>
             <td>

@@ -8,7 +8,7 @@
         <div class="col-md-6">
             <nav aria-label="Page navigation example ">
                 <div class="zvn-pagination">
-                {{ $items->links('pagination.pagination_backend') }}
+                {{ $items->appends(request()->input())->links('pagination.pagination_backend') }}
                 </div>
             </nav> 
         </div>

@@ -3,7 +3,7 @@
   use Config;
   use Route;
   class Template {
-    public static function showButtonFilter($controllerName,$countByStatus,$currentFilterStatus){
+    public static function showButtonFilter($controllerName,$countByStatus,$currentFilterStatus,$paramsSearch){
       $xhtml = null;
       $tmplStatus = Config::get('zvn.template.status');
       if(count($countByStatus) > 0) {
@@ -16,6 +16,9 @@
           $statusValue = array_key_exists($statusValue,$tmplStatus) ? $statusValue : 'default';
           $currentStatus = $tmplStatus[$statusValue];
           $link = Route($controllerName)."?filter_status=$statusValue";
+          if($paramsSearch['value'] != '') {
+            $link .= "&search_field={$paramsSearch['field']}&search_value={$paramsSearch['value']}";
+          }
           $class = ($currentFilterStatus == $statusValue) ? 'btn-danger' : 'btn-info';
           $xhtml .= '<a href="'.$link.'" type="button" class="btn '.$class.'"> 
                       '.$currentStatus['name'].' <span class="badge bg-white">'.$value['count'].'</span>

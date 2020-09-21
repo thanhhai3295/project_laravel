@@ -36,13 +36,23 @@ class SliderModel extends Model
         return $result;
     }
     public function countItems($params = null,$options = null) { 
-        $result = null;
         if($options['task'] == 'count-items') {
-            $result = self::select(DB::raw('count(id) as count,status'))
-            ->groupBy('status')
-            ->get()
-            ->toArray();
+            $query = self::select(DB::raw('count(id) as count,status'))
+            ->groupBy('status');
         }
+        if($params['search']['value'] != '') {
+            if($params['search']['field'] == 'all') {
+                $query->where(function($query) use ($params) {
+                    foreach ($this->fieldSearchAccepted as $key => $value) {
+                        $query->orWhere($value,'LIKE',"%{$params['search']['value']}%");
+                    }
+                });
+            } else if(in_array($params['search']['field'],$this->fieldSearchAccepted)){
+                $query->where($params['search']['field'],'LIKE',"%{$params['search']['value']}%");
+            }
+        }
+        
+        $result = $query->get()->toArray();
         return $result;
     }
 }
