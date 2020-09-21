@@ -95,5 +95,12 @@
       $xhtml .= '</div>';
       return $xhtml;
     }
+    public static function showMessageNotify(){
+      if (request()->session()->has('success')) {
+        $message = session('success');
+        echo "<script>notify('$message')</script>";
+        request()->session()->forget('success');
+      }
+    }
   }
 ?>

@@ -18,4 +18,5 @@
 <!-- Custom Theme Style -->
 <link href="{{asset('assmin/css/custom.min.css')}}" rel="stylesheet">
 <!-- Custom Theme Style -->
+<link href="{{asset('assmin/css/toastr.css')}}" rel="stylesheet">
 <link href="{{asset('assmin/css/mycss.css')}}" rel="stylesheet">

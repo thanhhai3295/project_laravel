@@ -34,7 +34,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('/',$controller.'index')->name($prefix);
     Route::get('form/{id?}',$controller.'form')->where('id','[0-9]+')->name($controllerName.'/form');
     Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
-    Route::get('change-status-{status}/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/status');
+    Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
   });
 
 });

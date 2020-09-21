@@ -55,4 +55,10 @@ class SliderModel extends Model
         $result = $query->get()->toArray();
         return $result;
     }
+    public function saveItems($params = null,$options = null){
+        if($options['task'] == 'change-status'){
+            $status = ($params['status'] == 'active') ? 'inactive' : 'active';
+            $this->where('id',$params['id'])->update(['status' => $status]);
+        }
+    }
 }

@@ -12,4 +12,10 @@
 <script src="{{asset('assmin/asset/iCheck/icheck.min.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('assmin/js/custom.min.js')}}"></script>
+<script src="{{asset('assmin/js/toastr.min.js')}}"></script>
+<script src="{{asset('assmin/js/message_notify.js')}}"></script>
 <script src="{{asset('assmin/js/my-js.js')}}"></script>
+
+@php
+  App\Helpers\Template::showMessageNotify();
+@endphp

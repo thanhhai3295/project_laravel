@@ -40,4 +40,10 @@ class SliderController extends Controller
     {
       return view($this->pathViewController.'index');
     }
+    public function status(Request $request){
+      $params['id'] = $request->id;
+      $params['status'] = $request->status;
+      $this->model->saveItems($params,['task' => 'change-status']);
+      return redirect()->route($this->controllerName)->with('success', 'Status Updated!');;
+    }
 }
