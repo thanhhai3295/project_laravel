@@ -61,4 +61,16 @@ class SliderModel extends Model
             $this->where('id',$params['id'])->update(['status' => $status]);
         }
     }
+    public function deleteItem($params = null,$options = null){
+        if($options['task'] == 'delete-item'){
+            $this->where('id',$params['id'])->delete();
+        }
+    }
+    public function getItem($params = null,$options = null){
+        $result = null;
+        if($options['task'] == 'get-item'){
+            $result = $this->select('id','name','description','link','thumb','created','created_by','modified','modified_by','status')->where('id',$params['id'])->first();
+        }
+        return $result;
+    }
 }
