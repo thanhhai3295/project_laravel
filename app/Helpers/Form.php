@@ -3,14 +3,23 @@
   use Config;
   use Route;
   class Form {
-    public static function show($elements){
+    public static function show($elements,$errors){
       $xhtml = null;
+      $arrErrors = $errors->messages();
+
       foreach ($elements as $key => $value) {
-        $xhtml .= self::showFormGroup($value);
+        $xhtml .= self::showFormGroup($value,$arrErrors);
       }
       return $xhtml;
     }
-    public static function showFormGroup($value){
+    public static function showFormGroup($value,$error){
+      $fieldError = isset($value['error']) ? $value['error'] : '';
+      $messageError = '';
+      if(!empty($error)) {
+        if($fieldError != '' && isset($error[$fieldError])) {
+          $messageError = !empty($error[$fieldError]) ? $error[$fieldError][0] : '';
+        }
+      }
       $type = ($value['type']??'' && $value['type'] == 'btn-submit') ? $value['type'] : 'input';
       $xhtml = null;
       switch ($type) {
@@ -37,6 +46,9 @@
                     </div>';
           break;
       }
+      $xhtml .= '<div class="row" style="margin:0px 0px 10px 1px">
+                  <div class="col-md-3"></div><div class="text-danger col-md-6">'.$messageError.'</div>
+                </div>';
       return $xhtml;
     }
     

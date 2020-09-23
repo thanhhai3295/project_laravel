@@ -42,7 +42,10 @@ return [
     */
 
     'disks' => [
-
+        'zvn_store_images' => [
+            'driver' => 'local',
+            'root'   => public_path('assmin/img')
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\SliderModel as MainModel;
 use Illuminate\Http\Request;
+use App\Http\Requests\SliderRequest as MainRequest;
 class SliderController extends Controller
 {
     private $model;
@@ -53,7 +54,17 @@ class SliderController extends Controller
       $this->model->saveItems($params,['task' => 'change-status']);
       return redirect()->route($this->controllerName)->with('success', 'Status Updated!');;
     }
-    public function save() {
-      return view($this->pathViewController.'save',[]);
+    public function save(MainRequest $request) {
+      if($request->method() == 'POST') {
+        $params = $request->all();
+        $task = 'add-item';
+        $notify = 'Add Item Success!';
+        if($params['id'] != NULL) {
+          $task = 'edit-item';
+          $notify = 'Edit Item Success!';
+        }
+        $this->model->saveItems($params,['task' => $task]);
+        return redirect()->route($this->controllerName)->with('success',$notify);
+      }
     }
 }
