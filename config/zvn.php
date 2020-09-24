@@ -43,11 +43,13 @@
     'config' => [
       'search' => [
         'default' => ['all','id','fullname'],
-        'slider'  => ['all','id','name','description','link']
+        'slider'  => ['all','id','name','description','link'],
+        'category'  => ['all','id','name']
       ],
       'button' => [
         'default' => ['edit','delete'],
-        'slider'  => ['edit','delete',]
+        'slider'  => ['edit','delete',],
+        'category'  => ['edit','delete',]
       ]
     ]
   ];

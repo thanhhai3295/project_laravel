@@ -6,7 +6,6 @@
 <body>
 <div class="super_container">
     @include('news.elements.header')
-    @include('news.elements.menu')
     {{-- @include('news.elements.slider')
     @include('news.elements.content') --}}
     @yield('content')
