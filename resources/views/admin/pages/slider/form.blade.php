@@ -5,7 +5,7 @@
   $formInputAttr = config('zvn.template.form_input');
   $formLabelAttr = config('zvn.template.form_label');
   $inputHiddenID = Form::hidden('id', $item['id']);
-  $inputHiddenThumb = Form::hidden('thumb', $item['thumb']);
+  $inputHiddenThumb = Form::hidden('thumb_current', $item['thumb']);
   $statusValue = [
     'default'  => config('zvn.template.status.default.name'),
     'active'   => config('zvn.template.status.active.name'),

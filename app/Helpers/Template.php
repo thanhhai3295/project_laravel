@@ -76,7 +76,7 @@
       return $xhtml;
     }
     public static function showItemThumb($controllerName,$thumbName,$thumbAlt){
-      $xhtml = '<img src="'.asset("assmin/img/$controllerName/$thumbName").'" alt="'.$thumbAlt.'" class="zvn-thumb">';
+      $xhtml = '<img src="'.asset("assmin/img/$controllerName/$thumbName").'" alt="'.$thumbAlt.'" class="zvn-thumb" id="blah">';
       return $xhtml;
     }
     public static function showButtonAction($controllerName,$id) {

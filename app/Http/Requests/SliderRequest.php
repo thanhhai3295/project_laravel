@@ -23,7 +23,8 @@ class SliderRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   $id = $this->id;
+    {   
+        $id = $this->id;
         $condThumb = 'bail|required|image|max:500';
         $condName = "bail|required|min:5|unique:$this->table,name";
         if(!empty($id)) {
@@ -35,7 +36,7 @@ class SliderRequest extends FormRequest
             'description' => 'bail|required',
             'status' => 'bail|in:active,inactive',
             'link' => 'bail|required|url|min:5',
-            'thumb' => 'bail|required|image|mimes:jpeg|max:500'
+            'thumb' => $condThumb
         ];
     }
     public function messages()

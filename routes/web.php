@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-$prefixAdmin = Config::get('test.prefix_admin');
-Route::get('/', function () {
-    return view('home');
-});
+$prefixAdmin = Config::get('zvn.url.prefix_admin');
+$prefixNews  = Config::get('zvn.url.prefix_news');
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 Route::group(['prefix' => $prefixAdmin], function () {
   // --------------- DASHBOARD ---------------
   $prefix = 'dashboard';
@@ -37,5 +37,15 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
     Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
   });
+});
 
+
+Route::group(['prefix' => $prefixNews], function () {
+  // --------------- DASHBOARD ---------------
+  $prefix = '';
+  $controllerName = 'home';
+  Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
+    $controller = 'App\Http\Controllers\\'.ucfirst($controllerName).'Controller@';
+    Route::get('/',$controller.'index')->name($prefix);
+  });
 });
