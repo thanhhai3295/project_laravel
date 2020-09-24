@@ -16,24 +16,29 @@ class SliderModel extends AdminModel
     }
     public function listItems($params = null,$options = null) {
         $result = null;
-        if($options['task'] == 'admin-list-items') {
-            $query = $this->select('id','name','description','link','thumb','created','created_by','modified','modified_by','status');
-        }
-        if($params['filter']['status'] != 'all') {
-            $query->where('status','=',$params['filter']['status']);
-        }
-        if($params['search']['value'] != '') {
-            if($params['search']['field'] == 'all') {
-                $query->where(function($query) use ($params) {
-                    foreach ($this->fieldSearchAccepted as $key => $value) {
-                        $query->orWhere($value,'LIKE',"%{$params['search']['value']}%");
-                    }
-                });
-            } else if(in_array($params['search']['field'],$this->fieldSearchAccepted)){
-                $query->where($params['search']['field'],'LIKE',"%{$params['search']['value']}%");
+            if($options['task'] == 'admin-list-items') {
+                $query = $this->select('id','name','description','link','thumb','created','created_by','modified','modified_by','status');
+            
+            if($params['filter']['status'] != 'all') {
+                $query->where('status','=',$params['filter']['status']);
             }
+            if($params['search']['value'] != '') {
+                if($params['search']['field'] == 'all') {
+                    $query->where(function($query) use ($params) {
+                        foreach ($this->fieldSearchAccepted as $key => $value) {
+                            $query->orWhere($value,'LIKE',"%{$params['search']['value']}%");
+                        }
+                    });
+                } else if(in_array($params['search']['field'],$this->fieldSearchAccepted)){
+                    $query->where($params['search']['field'],'LIKE',"%{$params['search']['value']}%");
+                }
+            }
+            $result = $query->orderBy('id','desc')->paginate($params['pagination']['totalItemsPerPage']);  
         }
-        $result = $query->orderBy('id','desc')->paginate($params['pagination']['totalItemsPerPage']);  
+        if($options['task'] == 'news-list-items') {
+            $query = $this->select('id','name','description','link','thumb','created','created_by','modified','modified_by','status')->where('status','active')->limit(5);
+            $result = $query->get()->toArray();
+        }
         return $result;
     }
     public function countItems($params = null,$options = null) { 

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SliderModel as SliderModel;
 class HomeController extends Controller
 {
-    private $model;
     private $controllerName     = 'home';
     private $pathViewController = 'news.pages.home.';
     private $params             = [];
@@ -16,8 +16,11 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     { 
+      $sliderModel = new SliderModel();
+      $itemSlider = $sliderModel->listItems(null,['task' => 'news-list-items']);
       return view($this->pathViewController.'index',[
         'params' => $this->params,
+        'itemSlider' => $itemSlider
       ]);
     }
     
