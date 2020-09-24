@@ -17,6 +17,10 @@
         'inactive'  => ['class' => 'btn-danger',  'name' =>'Inactive'],
         'default'   => ['class' => 'btn-info',    'name' =>'--- Choose Status ---']
       ],
+      'is_home' => [
+        '1'       => ['class' => 'btn-dark', 'name' =>'Show'],
+        '0'    => ['class' => 'btn-warning', 'name' =>'Hide']
+      ],
       'search' => [
         'all'         => ['name' =>'Search By All'],
         'id'          => ['name' =>'Search By ID'],

@@ -66,13 +66,20 @@
               <p><i class="fa fa-clock-o"></i>  '.date(Config::get('zvn.format.short_time'),strtotime($time)).'</p>';
       return $xhtml;      
     }
-    public static function showItemStatus($controllerName,$id,$status) {
+    public static function showItemStatus($controllerName,$id,$statusValue) {
       $tmplStatus = Config::get('zvn.template.status');
-      $statusValue = $status;
       $statusValue = array_key_exists($statusValue,$tmplStatus) ? $statusValue : 'default';
       $currentStatus = $tmplStatus[$statusValue];
-      $link = Route($controllerName.'/status',['status' => $status, 'id' => $id]);
+      $link = Route($controllerName.'/status',['status' => $statusValue, 'id' => $id]);
       $xhtml = '<a href="'.$link.'" type="button" class="btn btn-round '.$currentStatus['class'].'">'.$currentStatus['name'].'</a>';
+      return $xhtml;
+    }
+    public static function showItemIsHome($controllerName,$id,$isHomeValue) {
+      $tmplIsHome = Config::get('zvn.template.is_home');
+      $isHomeValue = array_key_exists($isHomeValue,$tmplIsHome) ? $isHomeValue : '1';
+      $currentisHome = $tmplIsHome[$isHomeValue];
+      $link = Route($controllerName.'/isHome',['isHome' => $isHomeValue, 'id' => $id]);
+      $xhtml = '<a href="'.$link.'" type="button" class="btn btn-round '.$currentisHome['class'].'">'.$currentisHome['name'].'</a>';
       return $xhtml;
     }
     public static function showItemThumb($controllerName,$thumbName,$thumbAlt){

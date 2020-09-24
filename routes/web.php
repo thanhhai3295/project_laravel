@@ -47,6 +47,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::post('save',$controller.'save')->name($controllerName.'/save');
     Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
     Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
+    Route::get('change-is-home-{isHome}/{id}',$controller.'isHome')->where('id','[0-9]+')->name($controllerName.'/isHome');
   });
 });
 

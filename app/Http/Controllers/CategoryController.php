@@ -54,6 +54,12 @@ class CategoryController extends Controller
       $this->model->saveItems($params,['task' => 'change-status']);
       return redirect()->route($this->controllerName)->with('success', 'Status Updated!');;
     }
+    public function isHome(Request $request){
+      $params['id'] = $request->id;
+      $params['isHome'] = $request->isHome;
+      $this->model->saveItems($params,['task' => 'change-is-home']);
+      return redirect()->route($this->controllerName)->with('success', 'isHome Updated!');;
+    }
     public function save(MainRequest $request) {
       if($request->method() == 'POST') {
         $params = $request->all();

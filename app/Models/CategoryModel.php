@@ -17,7 +17,7 @@ class CategoryModel extends AdminModel
     public function listItems($params = null,$options = null) {
         $result = null;
             if($options['task'] == 'admin-list-items') {
-                $query = $this->select('id','name','created','created_by','modified','modified_by','status');
+                $query = $this->select('id','is_home','name','created','created_by','modified','modified_by','status');
             
             if($params['filter']['status'] != 'all') {
                 $query->where('status','=',$params['filter']['status']);
@@ -66,6 +66,10 @@ class CategoryModel extends AdminModel
         if($options['task'] == 'change-status'){
             $status = ($params['status'] == 'active') ? 'inactive' : 'active';
             $this->where('id',$params['id'])->update(['status' => $status]);
+        }
+        if($options['task'] == 'change-is-home'){
+            $isHome = ($params['isHome'] == 1) ? 0 : 1;
+            $this->where('id',$params['id'])->update(['is_home' => $isHome]);
         }
         if($options['task'] == 'add-item'){
             $params['created_by'] = 'HaiDepTrai';
