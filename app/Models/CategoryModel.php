@@ -17,7 +17,7 @@ class CategoryModel extends AdminModel
     public function listItems($params = null,$options = null) {
         $result = null;
             if($options['task'] == 'admin-list-items') {
-                $query = $this->select('id','is_home','name','created','created_by','modified','modified_by','status');
+                $query = $this->select('id','is_home','display','name','created','created_by','modified','modified_by','status');
             
             if($params['filter']['status'] != 'all') {
                 $query->where('status','=',$params['filter']['status']);
@@ -37,6 +37,10 @@ class CategoryModel extends AdminModel
         }
         if($options['task'] == 'menu-list-items') {
             $query = $this->select('id','name')->where('status','active')->limit(8);
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'news-list-items-is-home') {
+            $query = $this->select('id','name','display')->where('status','active')->where('is_home',1);
             $result = $query->get()->toArray();
         }
         return $result;
@@ -66,6 +70,9 @@ class CategoryModel extends AdminModel
         if($options['task'] == 'change-status'){
             $status = ($params['status'] == 'active') ? 'inactive' : 'active';
             $this->where('id',$params['id'])->update(['status' => $status]);
+        }
+        if($options['task'] == 'change-display'){
+            $this->where('id',$params['id'])->update(['display' => $params['display'] ]);
         }
         if($options['task'] == 'change-is-home'){
             $isHome = ($params['isHome'] == 1) ? 0 : 1;

@@ -10,6 +10,7 @@
         <th class="column-title">Category Info</th>
         <th class="column-title">Trạng thái</th>
         <th class="column-title">Hiển thị home</th>
+        <th class="column-title">Kiểu hiển thị</th>
         <th class="column-title">Tạo mới</th>
         <th class="column-title">Chỉnh sửa</th>
         <th class="column-title">Hành động</th>
@@ -27,6 +28,7 @@
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
             $status          = Template::showItemStatus($controllerName,$id,$value['status']);
             $isHome          = Template::showItemIsHome($controllerName,$id,$value['is_home']);
+            $display         = Template::showItemDisplay($controllerName,$id,$value['display']);
             $listBtnAction   = Template::showButtonAction($controllerName,$id);
           @endphp 
           <tr class="{{ $class }} pointer">
@@ -34,6 +36,7 @@
             <td width="40%"><p>{!! $name !!}</p></td>
             <td>{!! $status !!}</td>
             <td>{!! $isHome !!}</td>
+            <td>{!! $display !!}</td>
             <td>{!! $createdHistory !!}</td>           
             <td>{!! $modifiedHistory !!}</td>
             <td class="last">{!! $listBtnAction !!}</td>

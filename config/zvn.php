@@ -21,6 +21,10 @@
         '1'       => ['class' => 'btn-dark', 'name' =>'Show'],
         '0'    => ['class' => 'btn-warning', 'name' =>'Hide']
       ],
+      'display' => [
+        'list'    => ['name' =>'List'],
+        'grid'    => ['name' =>'Grid']
+      ],
       'search' => [
         'all'         => ['name' =>'Search By All'],
         'id'          => ['name' =>'Search By ID'],

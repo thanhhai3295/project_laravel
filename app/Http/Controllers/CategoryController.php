@@ -54,6 +54,12 @@ class CategoryController extends Controller
       $this->model->saveItems($params,['task' => 'change-status']);
       return redirect()->route($this->controllerName)->with('success', 'Status Updated!');;
     }
+    public function display(Request $request){
+      $params['id'] = $request->id;
+      $params['display'] = $request->display;
+      $this->model->saveItems($params,['task' => 'change-display']);
+      return redirect()->route($this->controllerName)->with('success', 'Display Updated!');;
+    }
     public function isHome(Request $request){
       $params['id'] = $request->id;
       $params['isHome'] = $request->isHome;

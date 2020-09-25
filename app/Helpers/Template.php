@@ -82,6 +82,17 @@
       $xhtml = '<a href="'.$link.'" type="button" class="btn btn-round '.$currentisHome['class'].'">'.$currentisHome['name'].'</a>';
       return $xhtml;
     }
+    public static function showItemDisplay($controllerName,$id,$displayValue) {
+      $tmplDisplay = Config::get('zvn.template.display');
+      $link = route($controllerName.'/display',['display' => 'value_new','id' => $id]);
+      $xhtml = '<select name="select_change_attr" data-url="'.$link.'"  class="form-control">';
+      foreach ($tmplDisplay as $key => $value) {
+        $xhtmlSelected = ($key == $displayValue) ? 'selected="selected"' : '';
+        $xhtml .= '<option '.$xhtmlSelected.' value="'.$key.'">'.$value['name'].'</option>';
+      }
+      $xhtml .= '</select>';
+      return $xhtml;
+    }
     public static function showItemThumb($controllerName,$thumbName,$thumbAlt){
       $xhtml = '<img src="'.asset("assmin/img/$controllerName/$thumbName").'" alt="'.$thumbAlt.'" class="zvn-thumb" id="blah">';
       return $xhtml;
