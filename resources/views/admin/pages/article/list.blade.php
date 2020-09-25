@@ -7,8 +7,10 @@
     <thead>
       <tr class="headings">
         <th class="column-title">#</th>
-        <th class="column-title">Slider Info</th>
+        <th class="column-title">Article Info</th>
+        <th class="column-title">Thumb</th>
         <th class="column-title">Trạng thái</th>
+        <th class="column-title">Category</th>
         <th class="column-title">Tạo mới</th>
         <th class="column-title">Chỉnh sửa</th>
         <th class="column-title">Hành động</th>
@@ -22,30 +24,30 @@
             $index           = $key + 1;
             $class           = ($index % 2 == 0 ) ? 'event' : 'odd';
             $name            = Highlight::show($value['name'],$params['search'],'name');
-            $description     = Highlight::show($value['description'],$params['search'],'description');
-            $link            = Highlight::show($value['link'],$params['search'],'link');
+            $content         = Highlight::show($value['content'],$params['search'],'content');
             $thumb           = Template::showItemThumb($controllerName,$value['thumb'],$value['name']);
             $createdHistory  = Template::showItemHistory($value['created_by'],$value['created']);
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
             $status          = Template::showItemStatus($controllerName,$id,$value['status']);
+            $category        = $value['category_name'];
             $listBtnAction   = Template::showButtonAction($controllerName,$id);
           @endphp 
           <tr class="{{ $class }} pointer">
             <td>{{ $index }}</td>
             <td width="40%">
               <p><strong>Name:</strong> {!! $name !!}</p>
-              <p><strong>Description:</strong> {!! $description !!}</p>
-              <p><strong>Link:</strong> {!! $link !!}</p>
-              <p>{!! $thumb !!} </p>
+              <p><strong>Content:</strong> {!! $content !!}</p>
             </td>
+            <td>{!! $thumb !!}</td>
             <td>{!! $status !!}</td>
+            <td>{!! $category !!}</td>
             <td>{!! $createdHistory !!}</td>           
             <td>{!! $modifiedHistory !!}</td>
             <td class="last">{!! $listBtnAction !!}</td>
           </tr>
         @endforeach
         @else
-          @include('admin.templates.list_empty',['colspan' => 6])
+          @include('admin.templates.list_empty',['colspan' => 7])
         @endif                              
             
       </tbody>

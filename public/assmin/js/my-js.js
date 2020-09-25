@@ -15,8 +15,9 @@ $(document).ready(function() {
 
 	let $inputSearchField = $("input[name  = search_field]");
 	let $inputSearchValue = $("input[name  = search_value]");
-
+	let $categoryFilter   = $("select[name = cat_filter]");
 	let $selectFilter     = $("select[name = select_filter]");
+
 	let $selectChangeAttr = $("select[name =  select_change_attr]");
 	let $selectChangeAttrAjax = $("select[name =  select_change_attr_ajax]");
 
@@ -34,12 +35,12 @@ $(document).ready(function() {
 
 		var pathname	= window.location.pathname;
 		let searchParams= new URLSearchParams(window.location.search);
-		params 			= ['page', 'filter_status', 'select_field', 'select_value'];
+		params 			= ['page', 'filter_status', 'select_field', 'select_value','filter_category'];
 
 		let link		= "";
 		$.each( params, function( key, value ) {
 			if (searchParams.has(value) ) {
-				link += value + "=" + searchParams.get(value) + "&"
+				link += value + "=" + searchParams.get(value) + "&";
 			}
 		});
 
@@ -75,7 +76,7 @@ $(document).ready(function() {
 		let link		= "";
 		$.each( params, function( key, value ) {
 			if (searchParams.has(value) ) {
-				link += value + "=" + searchParams.get(value) + "&"
+				link += value + "=" + searchParams.get(value) + "&";
 			}
 		});
 
@@ -145,6 +146,19 @@ $(document).ready(function() {
 			}
 		});
 
+	});
+	$categoryFilter.on('change', function(e) {
+		var id = $(this).val();
+		var pathname	= window.location.pathname;
+		let searchParams= new URLSearchParams(window.location.search);
+		params 			= ['page', 'filter_status', 'search_field', 'search_value'];
+		let link		= "";
+		$.each( params, function( key, value ) {
+			if (searchParams.has(value) ) {
+				link += value + "=" + searchParams.get(value) + "&";
+			}
+		});
+		window.location.href = pathname + "?" + link +'filter_category='+id;
 	});
 	//Confirm button delete item
 	$('.btn-delete').on('click', function() {

@@ -10,6 +10,7 @@
 <script src="{{asset('assmin/asset/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
 <!-- iCheck -->
 <script src="{{asset('assmin/asset/iCheck/icheck.min.js')}}"></script>
+<script src="{{asset('assmin/js/ckeditor/ckeditor.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('assmin/js/custom.min.js')}}"></script>
 <script src="{{asset('assmin/js/toastr.min.js')}}"></script>

@@ -11,6 +11,7 @@
     'template' => [
       'form_input' => ['class' => 'form-control col-md-6 col-xs-12'],
       'form_label' => ['class' => 'control-label col-md-3 col-sm-3 col-xs-12'],
+      'form_ckeditor' => ['class' => 'control-label col-md-3 col-sm-3 col-xs-12 ckeditor'],
       'status' => [
         'all'       => ['class' => 'btn-primary', 'name' =>'All'],
         'active'    => ['class' => 'btn-success', 'name' =>'Active'],
@@ -52,12 +53,14 @@
       'search' => [
         'default' => ['all','id','fullname'],
         'slider'  => ['all','id','name','description','link'],
-        'category'  => ['all','id','name']
+        'category'  => ['all','id','name'],
+        'article'  => ['all','name','content'],
       ],
       'button' => [
         'default' => ['edit','delete'],
         'slider'  => ['edit','delete',],
-        'category'  => ['edit','delete',]
+        'category'  => ['edit','delete',],
+        'article'  => ['edit','delete',]
       ]
     ]
   ];

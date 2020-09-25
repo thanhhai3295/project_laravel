@@ -120,5 +120,16 @@
         request()->session()->forget('success');
       }
     }
+    public static function showCategoryFilter($controllerName,$arrayCategory,$categoryFilter){
+      $xhtml = '<form class="form-horizontal" role="form" enctype="multipart/form-data">';
+      $xhtml = '<select class="form-control" style="width:auto;display:inline" name=cat_filter>';
+      $currentFilter = (request()->filter_category)??'';
+        foreach ($arrayCategory as $key => $value) {
+          $selected = ($key == $currentFilter) ? 'selected=selected' : '';
+          $xhtml .= '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+        }
+      $xhtml .= '</select></form>';
+      return $xhtml;
+    }
   }
 ?>
