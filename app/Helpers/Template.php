@@ -82,9 +82,9 @@
       $xhtml = '<a href="'.$link.'" type="button" class="btn btn-round '.$currentisHome['class'].'">'.$currentisHome['name'].'</a>';
       return $xhtml;
     }
-    public static function showItemDisplay($controllerName,$id,$displayValue) {
-      $tmplDisplay = Config::get('zvn.template.display');
-      $link = route($controllerName.'/display',['display' => 'value_new','id' => $id]);
+    public static function showItemSelect($controllerName,$id,$displayValue,$fieldName) {
+      $tmplDisplay = Config::get('zvn.template.'.$fieldName);
+      $link = route($controllerName.'/'.$fieldName,[$fieldName => 'value_new','id' => $id]);
       $xhtml = '<select name="select_change_attr" data-url="'.$link.'"  class="form-control">';
       foreach ($tmplDisplay as $key => $value) {
         $xhtmlSelected = ($key == $displayValue) ? 'selected="selected"' : '';
@@ -120,16 +120,23 @@
         request()->session()->forget('success');
       }
     }
-    public static function showCategoryFilter($controllerName,$arrayCategory,$categoryFilter){
+    public static function showSelectFilter($controllerName,$arrayData,$valueFilter,$field){
       $xhtml = '<form class="form-horizontal" role="form" enctype="multipart/form-data">';
-      $xhtml = '<select class="form-control" style="width:auto;display:inline" name=cat_filter>';
-      $currentFilter = (request()->filter_category)??'';
-        foreach ($arrayCategory as $key => $value) {
-          $selected = ($key == $currentFilter) ? 'selected=selected' : '';
+      $xhtml = '<select class="form-control" style="width:auto;display:inline" data-filter="'.$field.'" name=select_filter>';
+        foreach ($arrayData as $key => $value) {
+          $selected = ($key == $valueFilter) ? 'selected=selected' : '';
           $xhtml .= '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
         }
       $xhtml .= '</select></form>';
       return $xhtml;
+    }
+    public static function showDateTimeFrontEnd($datetime){
+      return date_format(date_create($datetime),Config::get('zvn.format.short_time'));
+    }
+    public static function showContent($content, $length, $prefix = '...'){
+      $prefix = ($length == 0) ? '' : $prefix;
+      $content = str_replace(['<p>','</p>'],'',$content);
+      return preg_replace('/\s+?(\S+)?$/','',substr($content,0,$length)).$prefix;
     }
   }
 ?>

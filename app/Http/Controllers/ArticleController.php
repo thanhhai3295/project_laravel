@@ -23,6 +23,7 @@ class ArticleController extends Controller
     { 
       $this->params['filter']['status'] = $request->input('filter_status','all');
       $this->params['filter']['category'] = $request->input('filter_category','');
+      $this->params['filter']['type'] = $request->input('filter_type','');
       $this->params['search']['field'] = $request->input('search_field','');
       $this->params['search']['value'] = $request->input('search_value','');
       $items = $this->model->listItems($this->params,['task' => 'admin-list-items']);
@@ -62,6 +63,12 @@ class ArticleController extends Controller
       $params['status'] = $request->status;
       $this->model->saveItems($params,['task' => 'change-status']);
       return redirect()->route($this->controllerName)->with('success', 'Status Updated!');;
+    }
+    public function type(Request $request){
+      $params['id'] = $request->id;
+      $params['type'] = $request->type;
+      $this->model->saveItems($params,['task' => 'change-type']);
+      return redirect()->route($this->controllerName)->with('success', 'Type Updated!');;
     }
     public function save(MainRequest $request) {
       if($request->method() == 'POST') {

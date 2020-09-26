@@ -60,6 +60,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::post('save',$controller.'save')->name($controllerName.'/save');
     Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
     Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
+    Route::get('change-type-{type}/{id}',$controller.'type')->where('id','[0-9]+')->name($controllerName.'/type');
   });
 });
 

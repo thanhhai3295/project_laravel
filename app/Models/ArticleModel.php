@@ -17,13 +17,16 @@ class ArticleModel extends AdminModel
     public function listItems($params = null,$options = null) {
         $result = null;
             if($options['task'] == 'admin-list-items') {
-                $query = $this->select('a.id','a.name','a.content','a.thumb','a.created','a.created_by','a.modified','a.modified_by','a.status','c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
+                $query = $this->select('a.id','a.name','a.content','a.thumb','a.type','a.status','c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
             
             if($params['filter']['status'] != 'all') {
                 $query->where('a.status','=',$params['filter']['status']);
             }
             if(!empty($params['filter']['category'])) {
                 $query->where('a.category_id','=',$params['filter']['category']);
+            }
+            if(!empty($params['filter']['type'])) {
+                $query->where('a.type','=',$params['filter']['type']);
             }
             if($params['search']['value'] != '') {
                 if($params['search']['field'] == 'all') {
@@ -40,6 +43,30 @@ class ArticleModel extends AdminModel
         }
         if($options['task'] == 'news-list-items') {
             $query = $this->select('id','name','content','thumb','created','created_by','modified','modified_by','status')->where('status','active')->limit(5);
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'news-list-items-feature') {
+            $query = $this->select('a.id','a.name','a.content','a.created','a.category_id','a.thumb','a.type','a.status','c.name as category_name')
+                ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
+                ->where('a.status','active')
+                ->where('type','feature')
+                ->orderBy('id','desc')
+                ->take(3);
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'news-list-items-lastest') {
+            $query = $this->select('a.id','a.name','a.content','a.created','a.category_id','a.thumb','a.status','c.name as category_name')
+                ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
+                ->where('a.status','active')
+                ->orderBy('id','desc')
+                ->take(4);
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'news-list-items-in-category') {
+            $query = $this->select('id','name','content','thumb','created')
+                ->where('status','active')
+                ->where('category_id',$params['category_id'])
+                ->take(4);
             $result = $query->get()->toArray();
         }
         
@@ -71,6 +98,9 @@ class ArticleModel extends AdminModel
         if($options['task'] == 'change-status'){
             $status = ($params['status'] == 'active') ? 'inactive' : 'active';
             $this->where('id',$params['id'])->update(['status' => $status]);
+        }
+        if($options['task'] == 'change-type'){
+            $this->where('id',$params['id'])->update(['type' => $params['type']]);
         }
         if($options['task'] == 'add-item'){
             $params['created_by'] = 'HaiDepTrai';

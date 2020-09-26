@@ -19,7 +19,7 @@
             <!-- Sidebar -->
             <div class="col-lg-3">
                 <div class="sidebar">
-                    @include('news.block.lastest_post')
+                    @include('news.block.lastest_post',['items' => $itemsLastest])
                     @include('news.block.advertisement')
                     @include('news.block.most_view')
                     @include('news.block.tags')

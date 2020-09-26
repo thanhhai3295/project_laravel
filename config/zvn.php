@@ -26,6 +26,10 @@
         'list'    => ['name' =>'List'],
         'grid'    => ['name' =>'Grid']
       ],
+      'type' => [
+        'feature'    => ['name' =>'Feature'],
+        'normal'    => ['name' =>'Normal']
+      ],
       'search' => [
         'all'         => ['name' =>'Search By All'],
         'id'          => ['name' =>'Search By ID'],

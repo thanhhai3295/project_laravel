@@ -28,7 +28,7 @@
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
             $status          = Template::showItemStatus($controllerName,$id,$value['status']);
             $isHome          = Template::showItemIsHome($controllerName,$id,$value['is_home']);
-            $display         = Template::showItemDisplay($controllerName,$id,$value['display']);
+            $display         = Template::showItemSelect($controllerName,$id,$value['display'],'display');
             $listBtnAction   = Template::showButtonAction($controllerName,$id);
           @endphp 
           <tr class="{{ $class }} pointer">

@@ -3,7 +3,13 @@
     use App\Helpers\Template as Template; 
     $xhtmlButtonFilter = Template::showButtonFilter($controllerName,$countByStatus,$params['filter']['status'],$params['search']);
     $xhtmlAreaSearch   = Template::showAreaSearch($controllerName,$params['search']);
-    $xhtmlCategoryFilter   = Template::showCategoryFilter($controllerName,$itemCategory,$params['filter']['category']);
+    $xhtmlCategoryFilter   = Template::showSelectFilter($controllerName,$itemCategory,$params['filter']['category'],'category');
+    $itemType = Config::get('zvn.template.type');
+    $arrayType = [];
+    foreach ($itemType as $key => $value) {
+        $arrayType[$key] = $value['name'];
+    }
+    $xhtmlTypeFilter   = Template::showSelectFilter($controllerName,$arrayType,$params['filter']['type'],'type');
     
 @endphp
 @section('content')
@@ -18,6 +24,7 @@
                     <div class="col-md-6"> 
                         {!!$xhtmlButtonFilter!!} 
                         {!!$xhtmlCategoryFilter!!}
+                        {!!$xhtmlTypeFilter!!}
                     </div>  
                     <div class="col-md-5"> {!!$xhtmlAreaSearch!!} </div>
                 </div>

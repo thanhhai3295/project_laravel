@@ -12,7 +12,6 @@
         <th class="column-title">Trạng thái</th>
         <th class="column-title">Category</th>
         <th class="column-title">Tạo mới</th>
-        <th class="column-title">Chỉnh sửa</th>
         <th class="column-title">Hành động</th>
       </tr>
     </thead>
@@ -29,6 +28,7 @@
             $createdHistory  = Template::showItemHistory($value['created_by'],$value['created']);
             $modifiedHistory = Template::showItemHistory($value['modified_by'],$value['modified']);
             $status          = Template::showItemStatus($controllerName,$id,$value['status']);
+            $type            = Template::showItemSelect($controllerName,$id,$value['type'],'type');
             $category        = $value['category_name'];
             $listBtnAction   = Template::showButtonAction($controllerName,$id);
           @endphp 
@@ -40,9 +40,8 @@
             </td>
             <td>{!! $thumb !!}</td>
             <td>{!! $status !!}</td>
+            <td>{!! $type !!}</td>
             <td>{!! $category !!}</td>
-            <td>{!! $createdHistory !!}</td>           
-            <td>{!! $modifiedHistory !!}</td>
             <td class="last">{!! $listBtnAction !!}</td>
           </tr>
         @endforeach

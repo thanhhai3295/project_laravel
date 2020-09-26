@@ -80,9 +80,9 @@ $(document).ready(function() {
 			}
 		});
 
-		let select_field = $(this).data('field');
-		let select_value = $(this).val();
-		window.location.href = pathname + "?" + link.slice(0,-1) + 'select_field='+ select_field + '&select_value=' + select_value;
+		let filter = $(this).data('filter');
+		let value = $(this).val();
+		window.location.href = pathname + "?" + link + 'filter_'+ filter + '=' + value;
  	});
 
 	// Change attributes with selectbox
