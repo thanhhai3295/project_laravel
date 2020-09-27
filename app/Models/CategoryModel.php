@@ -103,6 +103,10 @@ class CategoryModel extends AdminModel
         if($options['task'] == 'get-item'){
             $result = $this->select('id','name','created','created_by','modified','modified_by','status')->where('id',$params['id'])->first();
         }
+        if($options['task'] == 'news-get-items'){
+            $result = $this->select('id','name','display')->where('id',$params['category_id'])->first();
+            if($result) $result->toArray();
+        }
         return $result;
     }
 

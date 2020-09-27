@@ -1,4 +1,4 @@
-@extends('news.main')
+@extends('news.main',['title' => 'Trang Chủ'])
 @section('content')
   @include('news.block.slider')
 

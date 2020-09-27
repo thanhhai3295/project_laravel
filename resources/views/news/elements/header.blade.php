@@ -1,5 +1,6 @@
 @php
     use App\Models\CategoryModel as CategoryModel;
+    use App\Helpers\URL;
     $categoryModel = new CategoryModel();
     $itemsCategory = $categoryModel->listItems(null,['task' => 'menu-list-items']);
     $xhtmlMenu = '';
@@ -8,8 +9,12 @@
         $xhtmlMenu = '<nav class="main_nav">
                         <ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
+        $categoryID = request()->category_id;
         foreach ($itemsCategory as $key => $value) {
-            $xhtmlMenu .= '<li><a href="#">'.$value['name'].'</a></li>';
+            $link = URL::linkCategory($value['name'],$value['id']);
+            
+            $classActive = ($value['id'] == $categoryID) ? 'class="active"' : '';
+            $xhtmlMenu .= '<li '.$classActive.'><a href="'.$link.'">'.$value['name'].'</a></li>';
             $xhtmlMenuMobile .= '<li class="menu_mm"><a href="#">'.$value['name'].'</a></li>';
         }
         $xhtmlMenu .= '</ul></nav>';
@@ -25,7 +30,7 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                         <div class="logo_container">
-                            <a href="#">
+                            <a href="{{route('home')}}">
                                 <div class="logo"><span>ZEND</span>VN</div>
                             </a>
                         </div>
