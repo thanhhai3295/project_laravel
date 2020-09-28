@@ -1,14 +1,17 @@
-@extends('news.main',['title' => $itemsCategory['name']])
+@extends('news.main',['title' => $itemsArticle['name']])
 @section('content')
 <div class="section-category">
-    @include('news.block.breadcrumb',['item' => $itemsCategory])
+    @include('news.block.breadcrumb_article',['item' => $itemsArticle])
     <div class="content_container container_category">
         <div class="featured_title">
             <div class="container">
                 <div class="row">
                     <!-- Main Content -->
                     <div class="col-lg-9">
-                        @include('news.pages.category.child-index.category',['item' => $itemsCategory])
+                        <div class="single_post"> 
+                        @include('news.pages.article.child-index.article')
+                        @include('news.pages.article.child-index.related')
+                        </div>
                     </div>
                     <!-- Sidebar -->
                     <div class="col-lg-3">

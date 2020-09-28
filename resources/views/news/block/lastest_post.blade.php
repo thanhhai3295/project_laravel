@@ -10,7 +10,7 @@
             $name = $item['name'];
             $categoryName = $item['category_name'];
             $linkCategory = URL::linkCategory($item['category_name'],$item['category_id']);
-            $linkArticle  = "#";
+            $linkArticle  = URL::linkArticle($name,$item['id']);
             $thumb = asset('assmin/img/article/'.$item['thumb']);
             $created = Template::showDateTimeFrontEnd($item['created']);
         @endphp

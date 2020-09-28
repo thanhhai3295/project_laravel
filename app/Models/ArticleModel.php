@@ -134,6 +134,10 @@ class ArticleModel extends AdminModel
         if($options['task'] == 'get-thumb'){
             $result = $this->select('thumb')->where('id',$params['id'])->first();
         }
+        if($options['task'] == 'news-get-items'){
+            $result = $this->select('a.id','a.name','a.content','a.thumb','a.created','c.name as category_name','c.id as category_id')->leftJoin('category as c', 'a.category_id', '=', 'c.id')->where('a.id',$params['article_id'])->where('a.status','active')->first();
+            if($result) $result = $result->toArray();
+        }
         return $result;
     }
 

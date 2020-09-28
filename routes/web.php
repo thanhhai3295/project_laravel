@@ -23,14 +23,14 @@ Route::group(['prefix' => $prefixAdmin], function () {
   $prefix = 'dashboard';
   $controllerName = 'dashboard';
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
-    $controller = 'App\Http\Controllers\\'.ucfirst($controllerName).'Controller@';
+    $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
     Route::get('/',$controller.'index')->name($prefix);
   });
   // --------------- SLIDER ---------------
   $prefix = 'slider';
   $controllerName = 'slider';
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
-    $controller = 'App\Http\Controllers\\'.ucfirst($controllerName).'Controller@';
+    $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
     Route::get('/',$controller.'index')->name($prefix);
     Route::get('form/{id?}',$controller.'form')->where('id','[0-9]+')->name($controllerName.'/form');
     Route::post('save',$controller.'save')->name($controllerName.'/save');
@@ -41,7 +41,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
   $prefix = 'category';
   $controllerName = 'category';
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
-    $controller = 'App\Http\Controllers\\'.ucfirst($controllerName).'Controller@';
+    $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
     Route::get('/',$controller.'index')->name($prefix);
     Route::get('form/{id?}',$controller.'form')->where('id','[0-9]+')->name($controllerName.'/form');
     Route::post('save',$controller.'save')->name($controllerName.'/save');
@@ -54,7 +54,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
   $prefix = 'article';
   $controllerName = 'article';
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
-    $controller = 'App\Http\Controllers\\'.ucfirst($controllerName).'Controller@';
+    $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
     Route::get('/',$controller.'index')->name($prefix);
     Route::get('form/{id?}',$controller.'form')->where('id','[0-9]+')->name($controllerName.'/form');
     Route::post('save',$controller.'save')->name($controllerName.'/save');
@@ -80,5 +80,13 @@ Route::group(['prefix' => $prefixNews], function () {
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
     $controller = 'App\Http\Controllers\News\\'.ucfirst($controllerName).'Controller@';
     Route::get('/{category_name}-{category_id}.html',$controller.'index')->where('category_id','[0-9]+')->where('category_name','[0-9A-Za-z_-]+')->name($controllerName.'/index');
+  });
+
+  // --------------- ARTICLE ---------------
+  $prefix = 'bai-viet';
+  $controllerName = 'article';
+  Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
+    $controller = 'App\Http\Controllers\News\\'.ucfirst($controllerName).'Controller@';
+    Route::get('/{article_name}-{article_id}.html',$controller.'index')->where('article_id','[0-9]+')->where('article_name','[0-9A-Za-z_-]+')->name($controllerName.'/index');
   });
 });
