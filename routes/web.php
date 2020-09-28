@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 $prefixAdmin = Config::get('zvn.url.prefix_admin');
 $prefixNews  = Config::get('zvn.url.prefix_news');
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
+
 Route::group(['prefix' => $prefixAdmin], function () {
   // --------------- DASHBOARD ---------------
   $prefix = 'dashboard';
@@ -61,6 +59,20 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
     Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
     Route::get('change-type-{type}/{id}',$controller.'type')->where('id','[0-9]+')->name($controllerName.'/type');
+  });
+  // --------------- USER ---------------
+  $prefix = 'user';
+  $controllerName = 'user';
+  Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
+    $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
+    Route::get('/',$controller.'index')->name($prefix);
+    Route::get('form/{id?}',$controller.'form')->where('id','[0-9]+')->name($controllerName.'/form');
+    Route::post('save',$controller.'save')->name($controllerName.'/save');
+    Route::get('delete/{id}',$controller.'delete')->where('id','[0-9]+')->name($controllerName.'/delete');
+    Route::get('change-status-{status}/{id}',$controller.'status')->where('id','[0-9]+')->name($controllerName.'/status');
+    Route::get('change-level-{level}/{id}',$controller.'level')->where('id','[0-9]+')->name($controllerName.'/level');
+    Route::post('change-level',$controller.'level')->where('id','[0-9]+')->name($controllerName.'/change-level');
+    Route::post('change-password',$controller.'change_password')->name($controllerName.'/change-password');
   });
 });
 

@@ -115,7 +115,9 @@ $(document).ready(function() {
 	$("#thumb").change(function() {
 		readURL(this);
 	});
-
+	$("#avatar").change(function() {
+		readURL(this);
+	});
 	$selectChangeAttr.on('change', function() {
 		let select_value = $(this).val();
 		let $url = $(this).data('url');

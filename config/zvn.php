@@ -22,6 +22,10 @@
         '1'       => ['class' => 'btn-dark', 'name' =>'Show'],
         '0'    => ['class' => 'btn-warning', 'name' =>'Hide']
       ],
+      'level' => [
+        'admin'       => ['name' =>'Admin'],
+        'member'    => ['name' =>'Member']
+      ],
       'display' => [
         'list'    => ['name' =>'List'],
         'grid'    => ['name' =>'Grid']
@@ -59,12 +63,14 @@
         'slider'  => ['all','id','name','description','link'],
         'category'  => ['all','id','name'],
         'article'  => ['all','name','content'],
+        'user'  => ['all','username','email']
       ],
       'button' => [
         'default' => ['edit','delete'],
         'slider'  => ['edit','delete',],
         'category'  => ['edit','delete',],
-        'article'  => ['edit','delete',]
+        'article'  => ['edit','delete',],
+        'user'  => ['edit']
       ]
     ]
   ];

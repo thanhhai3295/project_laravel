@@ -6,7 +6,6 @@
     public static function show($elements,$errors){
       $xhtml = null;
       $arrErrors = $errors->messages();
-
       foreach ($elements as $key => $value) {
         $xhtml .= self::showFormGroup($value,$arrErrors);
       }
@@ -42,6 +41,15 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         '.$value['element'].'
                         <p style="margin-top: 50px;">'.$value['thumb'].'</p>
+                      </div>
+                    </div>';
+          break;
+        case 'avatar':
+          $xhtml .= '<div class="form-group">
+                      '.$value['label'].'
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        '.$value['element'].'
+                        <p style="margin-top: 50px;">'.$value['avatar'].'</p>
                       </div>
                     </div>';
           break;
