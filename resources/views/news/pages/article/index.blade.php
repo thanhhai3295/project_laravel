@@ -10,7 +10,7 @@
                     <div class="col-lg-9">
                         <div class="single_post"> 
                         @include('news.pages.article.child-index.article')
-                        @include('news.pages.article.child-index.related')
+                        @include('news.pages.article.child-index.related',['item' => $itemsArticle])
                         </div>
                     </div>
                     <!-- Sidebar -->

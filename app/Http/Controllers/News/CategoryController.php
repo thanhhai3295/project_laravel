@@ -24,7 +24,6 @@ class CategoryController extends Controller
       if(!($itemsCategory)) return redirect()->route('home');
       $itemsLastest = $articleModel->listItems(null,['task' => 'news-list-items-lastest']);
       $itemsCategory['article'] = $articleModel->listItems(['category_id' => $params['category_id']],['task' => 'news-list-items-in-category']);
-
       return view($this->pathViewController.'index',[
         'params' => $this->params,
         'itemsLastest' => $itemsLastest,

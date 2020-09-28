@@ -69,6 +69,14 @@ class ArticleModel extends AdminModel
                 ->take(4);
             $result = $query->get()->toArray();
         }
+        if($options['task'] == 'news-list-items-related-in-category') {
+            $query = $this->select('id','name','content','thumb','created')
+            ->where('status','active')
+            ->where('category_id',$params['category_id'])
+            ->where('id','!=',$params['article_id'])
+            ->take(4);
+        $result = $query->get()->toArray();
+        }
         
         return $result;
     }
@@ -135,7 +143,7 @@ class ArticleModel extends AdminModel
             $result = $this->select('thumb')->where('id',$params['id'])->first();
         }
         if($options['task'] == 'news-get-items'){
-            $result = $this->select('a.id','a.name','a.content','a.thumb','a.created','c.name as category_name','c.id as category_id')->leftJoin('category as c', 'a.category_id', '=', 'c.id')->where('a.id',$params['article_id'])->where('a.status','active')->first();
+            $result = $this->select('a.id','a.name','a.content','a.thumb','a.created','c.name as category_name','c.display','c.id as category_id')->leftJoin('category as c', 'a.category_id', '=', 'c.id')->where('a.id',$params['article_id'])->where('a.status','active')->first();
             if($result) $result = $result->toArray();
         }
         return $result;
