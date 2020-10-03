@@ -17,7 +17,10 @@
             $xhtmlMenu .= '<li '.$classActive.'><a href="'.$link.'">'.$value['name'].'</a></li>';
             $xhtmlMenuMobile .= '<li class="menu_mm"><a href="#">'.$value['name'].'</a></li>';
         }
-        $xhtmlMenu .= '</ul></nav>';
+        $xhtmlLogin = '<li><a href="'.route('auth/login').'">Đăng Nhập</a></li>';
+        $xhtmlLogout = '<li><a href="'.route('auth/logout').'">Đăng Xuất</a></li>';
+        $xhtmlAuth = session('userInfo') ? $xhtmlLogout :  $xhtmlLogin;
+        $xhtmlMenu .= $xhtmlAuth.'</ul></nav>';
         $xhtmlMenuMobile .= '</ul></nav>';
     }
 @endphp

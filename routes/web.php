@@ -16,7 +16,7 @@ $prefixAdmin = Config::get('zvn.url.prefix_admin');
 $prefixNews  = Config::get('zvn.url.prefix_news');
 
 
-Route::group(['prefix' => $prefixAdmin], function () {
+Route::group(['prefix' => $prefixAdmin,'middleware' => ['permission.admin']], function () {
   // --------------- DASHBOARD ---------------
   $prefix = 'dashboard';
   $controllerName = 'dashboard';
@@ -74,6 +74,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
     Route::post('change-level',$controller.'level')->where('id','[0-9]+')->name($controllerName.'/change-level');
     Route::post('change-password',$controller.'change_password')->name($controllerName.'/change-password');
   });
+
 });
 
 
@@ -101,4 +102,27 @@ Route::group(['prefix' => $prefixNews], function () {
     $controller = 'App\Http\Controllers\News\\'.ucfirst($controllerName).'Controller@';
     Route::get('/{article_name}-{article_id}.html',$controller.'index')->where('article_id','[0-9]+')->where('article_name','[0-9A-Za-z_-]+')->name($controllerName.'/index');
   });
+
+  // ====================== LOGIN ========================
+    // news69/login
+    $prefix         = '';
+    $controllerName = 'auth';
+    
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = 'App\Http\Controllers\News\\'.ucfirst($controllerName).'Controller@';
+        Route::get('/login',$controller.'login')->name($controllerName.'/login')->middleware('check.login');
+
+        Route::post('/postLogin',$controller.'postLogin')->name($controllerName.'/postLogin');
+
+        // ====================== LOGOUT ========================
+        Route::get('/logout',$controller.'logout')->name($controllerName.'/logout');
+    });
+
+    $prefix         = '';
+    $controllerName = 'notify';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = 'App\Http\Controllers\News\\'.ucfirst($controllerName).'Controller@';
+        Route::get('/no-permission',$controller.'noPermission')->name($controllerName.'/noPermission');
+    });
+
 });
