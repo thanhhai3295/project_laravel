@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use App\Exceptions\RenderException as RenderException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -12,7 +12,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        
     ];
 
     /**
@@ -31,7 +31,7 @@ class Handler extends ExceptionHandler
      * @return void
      */
     public function register()
-    {
-        //
+    { 
+        
     }
 }

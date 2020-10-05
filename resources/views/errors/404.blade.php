@@ -1,4 +1,4 @@
-@extends('errors.main')
+{{-- @extends('errors.main')
 
 @section('content')
   <section class="page_404">
@@ -21,4 +21,5 @@
       </div>
     </div>
 </section>
-@endsection
+@endsection --}}
+day la trang 404

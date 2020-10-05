@@ -3,6 +3,7 @@
   use App\Helpers\Form as FormTemplate; 
   $inputHiddenID = Form::hidden('id', $item['id']);
   $inputHiddenTask = Form::hidden('task', 'change-level');
+  $inputHiddenaaa = Form::hidden('aaa', 'change-level');
   $formInputAttr = config('zvn.template.form_input');
   $formLabelAttr = config('zvn.template.form_label');
   $levelValue = [
@@ -18,7 +19,7 @@
     ],
     [
       'type' => 'btn-submit',
-      'element' => $inputHiddenID.$inputHiddenTask.Form::submit('Save',['class' => 'btn btn-success'])
+      'element' => $inputHiddenID.$inputHiddenTask.$inputHiddenaaa.Form::submit('Save',['class' => 'btn btn-success'])
     ]
   ];
 @endphp

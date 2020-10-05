@@ -35,6 +35,13 @@ class AuthController extends Controller
             $request->session()->put('userInfo', $userInfo);
             return redirect()->route('home');
         }
+        // $credentials = $request->only('email', 'password');
+        // if (Auth::attempt($credentials)) {
+        //     // Authentication passed...
+        //     echo 'pass';
+        // } else {
+        //     echo 'fail';
+        // }
     }
 
     public function logout(Request $request)

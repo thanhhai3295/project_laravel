@@ -23,6 +23,7 @@ Route::group(['prefix' => $prefixAdmin,'middleware' => ['permission.admin']], fu
   Route::group(['prefix' => $prefix], function () use($prefix,$controllerName) {
     $controller = 'App\Http\Controllers\admin\\'.ucfirst($controllerName).'Controller@';
     Route::get('/',$controller.'index')->name($prefix);
+    Route::get('404',$controller.'error')->name('404');
   });
   // --------------- SLIDER ---------------
   $prefix = 'slider';
